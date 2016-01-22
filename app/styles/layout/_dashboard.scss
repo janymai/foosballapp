@@ -1,0 +1,88 @@
+$team-bg: #e7e7e7;
+$score-width: 40px;
+$nav-tabs-bg: #e7e7e7;
+$nav-tabs-active: darken($nav-tabs-bg, 6.5%);
+$rank-result-bg: #e7e7e7;
+
+.match__body {
+  .table-row {
+    &:nth-child(2n) {
+      .team {
+        &:last-child {
+          background-color: $team-bg;
+        }
+      }
+    }
+    &:nth-child(2n+1) {
+      .team {
+        &:first-child {
+          background-color: $team-bg;
+        }
+      }
+    }
+  }
+
+  .team {
+    padding-top: 10px;
+    > div {
+      float: left;
+    }
+    &:first-child {
+      text-align: right;
+    }
+  }
+
+  .score {
+    width: $score-width;
+    font-size: 24px;
+  }
+
+  .member {
+    width: calc(100% - #{$score-width});
+  }
+}
+
+// rank-result
+
+.rank-result {
+  background-color: $rank-result-bg;
+}
+
+.rank-tabs {
+  background-color: $nav-tabs-bg;
+  border: none;
+  > li {
+    width: 50%;
+    text-align: center;
+    > a {
+      &,
+      &:hover,
+      &:focus {
+        border: none;
+      }
+    }
+    &.active > a {
+      &,
+      &:hover,
+      &:focus {
+        border: none;
+        background-color: $nav-tabs-active;
+      }
+    }
+  }
+}
+
+.rank-tab-content {
+  padding: 20px;
+  .table__header,
+  .table__row {
+    margin-right: 0;
+    margin-left: 0;
+  }
+  .table__header {
+    padding-bottom: 10px;
+  }
+  .table__row {
+    padding-top: 20px;
+  }
+}
