@@ -1,0 +1,17 @@
+<header class="header -bg-gray-dark" ng-controller="HeaderCtrl">
+  <div ng-if="isShowNewGame">
+    <div ng-include="'/views/collections/new-game.html'"></div>
+  </div>
+  <div class="navbar" role="navigation">
+    <div class="container">
+      <ul class="list-inline pull-right nav-header">
+        <li>
+          <button type="button" class="btn btn-default btn__dark -radius" ng-click="showNewGame()">{{strOptionCreate}}</button>
+        </li>
+        <li>
+          <a href="#" class="-c-gray">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
