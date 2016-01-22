@@ -1,0 +1,34 @@
+.tags {
+  background-color: #3f3f3f;
+  border-radius: 10px;
+  .label {
+    cursor: pointer;
+    display: inline-block;
+    margin: 15px 0 15px 15px;
+  }
+}
+
+.type-score {
+  input {
+    @extend .-radius;
+    border: none;
+    font-size: 16px;
+    padding: 10px 15px;
+    width: 100%;
+  }
+  [class*="col-"] {
+    padding: 0;
+  }
+  .bar {
+    @include size(16px, 2px);
+    background: #fff;
+    display: block;
+    margin: 20px auto;
+  }
+}
+
+.panel-body__team {
+  li {
+    margin: 20px 30px;
+  }
+}
