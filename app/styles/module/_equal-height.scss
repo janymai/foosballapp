@@ -1,0 +1,42 @@
+@mixin row-equal-height($screen) {
+  .container-#{$screen}-equal-height {
+    display: table;
+  }
+  .row-#{$screen}-equal-height {
+    display: table-row;
+    > [class*="col-"] {
+      display: table-cell;
+      float: none;
+    }
+  }
+}
+
+@mixin column-display($screen) {
+  .col-#{$screen}-top {
+    vertical-align:top;
+  }
+  .col-#{$screen}-middle {
+      vertical-align:middle;
+  }
+  .col-#{$screen}-bottom {
+      vertical-align:bottom;
+  }
+}
+
+
+@include row-equal-height($screen: xs);
+@include column-display($screen: xs);
+
+@media (min-width: $screen-sm-min) {
+  @include row-equal-height($screen: sm);
+  @include column-display($screen: sm);
+}
+
+@media (min-width: $screen-md-min) {
+  @include row-equal-height($screen: md);
+  @include column-display($screen: md);
+}
+@media (min-width: $screen-lg-min) {
+  @include row-equal-height($screen: lg);
+  @include column-display($screen: lg);
+}

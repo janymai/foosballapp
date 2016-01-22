@@ -3,10 +3,10 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 @import "../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
 
-// @import "base/all",
-//         "layout/all",
-//         "state/all",
-//         "module/all";
+@import "base/all",
+        "layout/all",
+        "state/all",
+        "module/all";
 
 /* Put your CSS here */
 html, body {

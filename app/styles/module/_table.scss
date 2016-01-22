@@ -1,0 +1,13 @@
+.table-header {
+  @extend .-border-bottom;
+  @extend .h-space-in-xxsmall;
+  @extend .h-headspacer-in-xxsmall;
+}
+
+.tiny-table-header {
+  @extend .-tiny-border-bottom ;
+}
+
+.table-row {
+  margin: 20px 0;
+}
