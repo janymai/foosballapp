@@ -1,0 +1,10 @@
+$backgound-label-default: #6c6c6c;
+$color-label-default: #333;
+
+.label__default {
+  @extend .-radius;
+  background-color: $backgound-label-default;
+  color: $color-label-default;
+  font-size: 16px;
+  padding: 10px 15px;
+}

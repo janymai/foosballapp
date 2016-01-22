@@ -1,0 +1,7 @@
+$btn-dark-color: #fff;
+$btn-dark-bg: #333;
+$btn-dark-border: #fff;
+
+.btn__dark {
+  @include button-variant($btn-dark-color, $btn-dark-bg, $btn-dark-border);
+}
