@@ -7,10 +7,14 @@ angular.module('foosballApp', [
   'ngSanitize',
   'ui.router'
 ])
-  .config(function ($stateProvider, $urlRouterProvider, $compileProvider) {
+  .config(function (
+    $stateProvider,
+    $urlRouterProvider,
+    $compileProvider
+  ) {
     //delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
-    $urlRouterProvider.otherwise('/');
+
     $stateProvider
       .state('main', {
         url: '/main',
@@ -21,8 +25,11 @@ angular.module('foosballApp', [
         url: '/',
         templateUrl: 'views/dashboard.html',
         controller: 'DashboardCtrl'
-      })
+      });
+
+    // For any unmatched url, redirect to /
+    $urlRouterProvider.otherwise('/');
 
     // make href accept javascript:void(0) as a url
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|javascript):/);
-  })
+  });
