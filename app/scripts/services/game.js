@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('foosballApp')
-  .factory('DashboardService', function (Restangular) {
+  .factory('GameService', function Game(Restangular) {
     // define service
     var service = Restangular.all('games');
 
     return {
       /**
       * Get last games
-      * API: /api/games
+      * GET: /api/games
       *
       * @return {Promise}
       */

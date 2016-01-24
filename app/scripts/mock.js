@@ -2,15 +2,17 @@
 
 var nobackend = document.URL.match(/nobackend/);
 
+var LASTNAMES = ['A', 'B', 'C', 'D', 'R', 'S'];
+
 /** Endpoint */
 var startMock = function ($httpBackend) {
-  $httpBackend.whenGET('/api/games').respond(function () {
+  // /api/games
+  $httpBackend.when('GET', '/api/games').respond(function (method, url) {
     var limitMatches = 5,
         limitDays = 3,
         matches = [],
         days = [],
         dataByMonth,
-        lastNames = ['A', 'B', 'C', 'D', 'R', 'S'],
         day = new Date();
 
       /**
@@ -20,17 +22,32 @@ var startMock = function ($httpBackend) {
       * @return {matches}
       */
     _.each(_.range(limitMatches), function (index) {
-      matches.push({
-        id: index + 1,
-        "team_1": {
-          "point": Faker.random.number(5 + index),
-          "members": {"user_1": Faker.Name.firstName() + ' ' + _.shuffle(lastNames)[0], "user_2": Faker.Name.firstName() + ' ' + _.shuffle(lastNames)[1]}
-        },
-        "team_2": {
-          "point": Faker.random.number(5 + index),
-          "members": {"user_1": Faker.Name.firstName() + ' ' + _.shuffle(lastNames)[2], "user_2": Faker.Name.firstName() + ' ' + _.shuffle(lastNames)[3]}
-        }
-      })
+      if (index == 3) {
+        matches.push({
+          id: index + 1,
+          "team_1": {
+            "point": Faker.random.number(5 + index),
+            "members": {"user_name_1": Faker.Name.firstName() + ' ' + _.shuffle(LASTNAMES)[0], "user_name_2": ''}
+          },
+          "team_2": {
+            "point": Faker.random.number(5 + index),
+            "members": {"user_name_1": Faker.Name.firstName() + ' ' + _.shuffle(LASTNAMES)[2], "user_name_2": ''}
+          }
+        })
+      }
+      else {
+        matches.push({
+          id: index + 1,
+          "team_1": {
+            "point": Faker.random.number(5 + index),
+            "members": {"user_name_1": Faker.Name.firstName() + ' ' + _.shuffle(LASTNAMES)[0], "user_name_2": Faker.Name.firstName() + ' ' + _.shuffle(LASTNAMES)[1]}
+          },
+          "team_2": {
+            "point": Faker.random.number(5 + index),
+            "members": {"user_name_1": Faker.Name.firstName() + ' ' + _.shuffle(LASTNAMES)[2], "user_name_2": Faker.Name.firstName() + ' ' + _.shuffle(LASTNAMES)[3]}
+          }
+        })
+      }
     });
 
     /**
@@ -53,7 +70,44 @@ var startMock = function ($httpBackend) {
         "days": days
       };
 
-    return [200, {data: dataByMonth}, {}];
+    return [200, {results: dataByMonth}, {}];
+  });
+
+  /**
+  * Get ranking by players/teams
+  * API: /api/rank/teams
+  * API: /api/rank/players
+  */
+  var apiRank = /api\/rank\/([a-z]+)/
+  $httpBackend.when('GET', apiRank).respond(function (method, url) {
+    var indices = apiRank.exec(url),
+        rankBy = indices[1],
+        limitRank = 20,
+        rankData = [];
+    /**
+    * Render rank by players/teams data
+    *
+    * times render: limitRank
+    * @return {matches by players/teams}
+    */
+    _.each(_.range(limitRank), function (index) {
+      if (rankBy == 'players') {
+        rankData.push({
+          "id": index + 1,
+          "user_name": Faker.Name.firstName() + ' ' + _.shuffle(LASTNAMES)[0],
+          "point": (index + 1) * 5
+        });
+      }
+      if (rankBy == 'teams') {
+        rankData.push({
+          "id": index + 1,
+          "team": {"user_name_1": Faker.Name.firstName() + ' ' + _.shuffle(LASTNAMES)[0], "user_name_2": Faker.Name.firstName() + ' ' + _.shuffle(LASTNAMES)[1]},
+          "point": (index + 1) * 5
+        });
+      }
+    });
+
+    return [200, {results: rankData}, {}];
   });
 
   // If GET it is not api it will this passThrough

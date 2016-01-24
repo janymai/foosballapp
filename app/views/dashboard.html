@@ -14,10 +14,13 @@
               <div class="team col-xs-6">
                 <div class="member">
                   <p>
-                    {{ match.team_1.members.user_1 }}
+                    {{ match.team_1.members.user_name_1 }}
                   </p>
-                  <p>
-                    {{ match.team_1.members.user_2 }}
+                  <p ng-if="match.team_1.members.user_name_2">
+                    {{ match.team_1.members.user_name_2 }}
+                  </p>
+                  <p class="-bold" ng-if="match.team_1.members.user_name_2 == ''">
+                    --
                   </p>
                 </div>
                 <div class="score" ng-class="{'-bold': match.team_1.point > match.team_2.point}">
@@ -30,10 +33,13 @@
                 </div>
                 <div class="member">
                   <p>
-                    {{ match.team_2.members.user_1 }}
+                    {{ match.team_2.members.user_name_1 }}
                   </p>
-                  <p>
-                    {{ match.team_2.members.user_2 }}
+                  <p ng-if="match.team_2.members.user_name_2">
+                    {{ match.team_2.members.user_name_2 }}
+                  </p>
+                  <p class="-bold" ng-if="match.team_2.members.user_name_2 == ''">
+                    --
                   </p>
                 </div>
               </div> <!-- ./team -->
@@ -47,8 +53,8 @@
     <div class="col-xs-12 col-md-4 col-md-offset-1">
       <div class="rank-result -bg-gray -radius">
         <ul class="nav nav-tabs rank-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-          <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+          <li role="presentation" class="active"><a ng-click="loadRank('players')" class="-bold" aria-controls="home" role="tab" data-toggle="tab">Best players</a></li>
+          <li role="presentation"><a ng-click="loadRank('teams')" class="-bold" aria-controls="profile" role="tab" data-toggle="tab">Best teams</a></li>
         </ul>
         <div class="tab-content rank-tab-content">
           <div role="tabpanel" class="tab-pane active" id="home">
@@ -57,34 +63,27 @@
                 Rank
               </div>
               <div class="col-xs-6">
-                Name
+                <span ng-if="type != 'teams'">Name</span>
+                <span ng-if="type == 'teams'">Team</span>
               </div>
               <div class="col-xs-3 text-center">
                 Points
               </div>
             </div> <!-- ./table__header -->
 
-            <div class="row table__row">
+            <div class="row table__row" ng-repeat="item in rankData | orderBy: 'point' : true">
               <div class="col-xs-3">
-                01
+                {{ $index + 1 }}
               </div>
-              <div class="col-xs-6">
-                James B
+              <div class="col-xs-6" ng-if="type != 'teams'">
+                {{ item.user_name }}
+              </div>
+              <div class="col-xs-6" ng-if="type == 'teams'">
+                <p>{{ item.team.user_name_1 }}</p>
+                <p>{{ item.team.user_name_2 }}</p>
               </div>
               <div class="col-xs-3 text-center">
-                03
-              </div>
-            </div> <!-- ./table__row -->
-
-            <div class="row table__row">
-              <div class="col-xs-3">
-                01
-              </div>
-              <div class="col-xs-6">
-                James B
-              </div>
-              <div class="col-xs-3 text-center">
-                03
+                {{ item.point }}
               </div>
             </div> <!-- ./table__row -->
 
