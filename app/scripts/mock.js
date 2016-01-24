@@ -10,7 +10,8 @@ var startMock = function ($httpBackend) {
         matches = [],
         days = [],
         dataByMonth,
-        lastNames = ['A', 'B', 'C', 'D', 'R', 'S'];
+        lastNames = ['A', 'B', 'C', 'D', 'R', 'S'],
+        day = new Date();
 
       /**
       * Render matches data
@@ -39,8 +40,9 @@ var startMock = function ($httpBackend) {
     * @return {matches by days}
     */
     _.each(_.range(limitDays), function (index) {
+
       days.push({
-        "created_at": Faker.Date.recent(index),
+        "created_at": day.setDate(day.getDate() + index),
         "matches": matches
       })
     });
