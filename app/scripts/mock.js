@@ -7,7 +7,7 @@ var LASTNAMES = ['A', 'B', 'C', 'D', 'R', 'S'];
 /** Endpoint */
 var startMock = function ($httpBackend) {
   // /api/games
-  $httpBackend.when('GET', '/api/games').respond(function () {
+  $httpBackend.when('GET', '/api/games').respond(function (method, url) {
     var limitMatches = 5,
         limitDays = 3,
         matches = [],
@@ -70,7 +70,7 @@ var startMock = function ($httpBackend) {
         "days": days
       };
 
-    return [200, {data: dataByMonth}, {}];
+    return [200, {results: dataByMonth}, {}];
   });
 
   /**
@@ -79,12 +79,11 @@ var startMock = function ($httpBackend) {
   * API: /api/rank/players
   */
   var apiRank = /api\/rank\/([a-z]+)/
-  $httpBackend.when('GET', apiRank).respond(function () {
+  $httpBackend.when('GET', apiRank).respond(function (method, url) {
     var indices = apiRank.exec(url),
         rankBy = indices[1],
         limitRank = 20,
         rankData = [];
-
     /**
     * Render rank by players/teams data
     *
@@ -96,17 +95,19 @@ var startMock = function ($httpBackend) {
         rankData.push({
           "id": index + 1,
           "user_name": Faker.Name.firstName() + ' ' + _.shuffle(LASTNAMES)[0],
-          "point": Faker.random.number((index + 5) * index )
+          "point": (index + 1) * 5
         });
       }
       if (rankBy == 'teams') {
         rankData.push({
           "id": index + 1,
-          "team_1": {"user_name_1": Faker.Name.firstName() + ' ' + _.shuffle(LASTNAMES)[0], "user_name_2": Faker.Name.firstName() + ' ' + _.shuffle(LASTNAMES)[1]},
-          "point": Faker.random.number((index + 5) * index )
+          "team": {"user_name_1": Faker.Name.firstName() + ' ' + _.shuffle(LASTNAMES)[0], "user_name_2": Faker.Name.firstName() + ' ' + _.shuffle(LASTNAMES)[1]},
+          "point": (index + 1) * 5
         });
       }
     });
+
+    return [200, {results: rankData}, {}];
   });
 
   // If GET it is not api it will this passThrough
