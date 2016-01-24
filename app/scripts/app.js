@@ -5,12 +5,18 @@ angular.module('foosballApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ui.router'
+  'ui.router',
+  'restangular',
+  'angularMoment'
 ])
-  .config(function ($stateProvider, $urlRouterProvider, $compileProvider) {
+  .config(function (
+    $stateProvider,
+    $urlRouterProvider,
+    RestangularProvider,
+    $compileProvider
+  ) {
     //delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
-    $urlRouterProvider.otherwise('/');
     $stateProvider
       .state('main', {
         url: '/main',
@@ -21,8 +27,15 @@ angular.module('foosballApp', [
         url: '/',
         templateUrl: 'views/dashboard.html',
         controller: 'DashboardCtrl'
-      })
+      });
+
+    // For any unmatched url, redirect to /
+    $urlRouterProvider.otherwise('/');
+
+    // Config Restangular
+    RestangularProvider.setBaseUrl('/api/');
 
     // make href accept javascript:void(0) as a url
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|javascript):/);
-  })
+
+  });
