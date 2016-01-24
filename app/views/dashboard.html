@@ -9,8 +9,8 @@
           <div class="-border-bottom">
             <h3>{{ day.created_at | amDateFormat:'dddd DD' }}</h3>
           </div>
-          <div class="match__body" ng-repeat="match in day.matches">
-            <div class="row table-row">
+          <div class="match__body">
+            <div class="row table-row" ng-repeat="match in day.matches">
               <div class="team col-xs-6">
                 <div class="member">
                   <p>
