@@ -6,7 +6,8 @@ angular.module('foosballApp', [
   'ngResource',
   'ngSanitize',
   'ui.router',
-  'restangular'
+  'restangular',
+  'angularMoment'
 ])
   .config(function (
     $stateProvider,
