@@ -8,6 +8,7 @@ angular.module('foosballApp')
     return {
       /**
       * Get last games
+      * API: /api/games
       *
       * @return {Promise}
       */
