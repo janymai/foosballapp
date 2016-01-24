@@ -9,7 +9,8 @@ var startMock = function ($httpBackend) {
         limitDays = 3,
         matches = [],
         days = [],
-        dataByMonth;
+        dataByMonth,
+        lastNames = ['A', 'B', 'C', 'D', 'R', 'S'];
 
       /**
       * Render matches data
@@ -21,12 +22,12 @@ var startMock = function ($httpBackend) {
       matches.push({
         id: index + 1,
         "team_1": {
-          "point": Faker.random.number(10),
-          "members": {"user_1": Faker.Name.firstName(), "user_2": Faker.Name.firstName()}
+          "point": Faker.random.number(5 + index),
+          "members": {"user_1": Faker.Name.firstName() + ' ' + _.shuffle(lastNames)[0], "user_2": Faker.Name.firstName() + ' ' + _.shuffle(lastNames)[1]}
         },
         "team_2": {
-          "point": Faker.random.number(10),
-          "members": {"user_1": Faker.Name.firstName(), "user_2": Faker.Name.firstName()}
+          "point": Faker.random.number(5 + index),
+          "members": {"user_1": Faker.Name.firstName() + ' ' + _.shuffle(lastNames)[2], "user_2": Faker.Name.firstName() + ' ' + _.shuffle(lastNames)[3]}
         }
       })
     });
