@@ -21,24 +21,16 @@ angular.module('foosballApp')
     $scope.team_1 = [];
     $scope.team_2 = [];
 
-
-    // $scope.sortingLog = [];
-
     $scope.draggableOptions = {
+      revert: false,
+      cursor: "move",
       connectWith: ".connected-drop-target-sortable",
-      receive: function(e, ui) {
-        // var $this = $(this);
-        console.log('receive');
-        // if ($this.children('li').length > 1 && $this.attr('id') != "main_list") {
-        //   console.log('Only one per list!');
-        //   $(ui.sender).sortable('cancel');
-        // }
-      },
       stop: function (e, ui) {
         var $this = $(this);
         console.log($this);
         // if the element is removed from the first container
-        if ($this.children('li').length > 1 && $this.attr('id') != "main_list") {
+        if ($this.children('li').length > 2 && $this.attr('id') != "main_list") {
+          $(ui.sender).sortable('cancel');
         }
         if (ui.item.sortable.source.hasClass('draggable-element-container') &&
             ui.item.sortable.droptarget &&
@@ -47,6 +39,7 @@ angular.module('foosballApp')
             ui.item.sortable.droptarget.hasClass('connected-drop-target-sortable')) {
           // restore the removed item
           ui.item.sortable.sourceModel.push(ui.item.sortable.model);
+          ui.item.remove();
         }
       }
     };
