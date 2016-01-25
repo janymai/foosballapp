@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('foosballApp')
-  .controller('NewGameCtrl', function ($scope, UserService) {
+  .controller('NewGameCtrl', function ($scope, UserService, ngDialog) {
     // Get Last Games
     var originalDraggables
 
@@ -21,27 +21,37 @@ angular.module('foosballApp')
     $scope.team_1 = [];
     $scope.team_2 = [];
 
+    // Drag user for team_1 & team_2
     $scope.draggableOptions = {
       revert: false,
       cursor: "move",
       connectWith: ".connected-drop-target-sortable",
       stop: function (e, ui) {
-        var $this = $(this);
-        console.log($this);
-        // if the element is removed from the first container
-        if ($this.children('li').length > 2 && $this.attr('id') != "main_list") {
-          $(ui.sender).sortable('cancel');
+        if ($scope.team_1.length == 2) {
+          $scope.sortableOptions_team_1 = {disabled: true};
         }
-        if (ui.item.sortable.source.hasClass('draggable-element-container') &&
-            ui.item.sortable.droptarget &&
-            ui.item.sortable.droptarget !== ui.item.sortable.source &&
-            ($scope.team_1.length < 3 && $scope.team_2.length < 3) &&
-            ui.item.sortable.droptarget.hasClass('connected-drop-target-sortable')) {
-          // restore the removed item
-          ui.item.sortable.sourceModel.push(ui.item.sortable.model);
-          ui.item.remove();
+        if ($scope.team_2.length == 2) {
+          $scope.sortableOptions_team_2 = {disabled: true};
+        }
+        if ($scope.sortableOptions_team_1.disabled && $scope.sortableOptions_team_2.disabled) {
+          $scope.draggableOptions = {disabled: true};
         }
       }
     };
 
+
+    // when finished create a new game newgame template will close
+    $scope.createGame = function () {
+      if ($scope.team_1.length == $scope.team_2.length && $scope.team_1.length > 0 && $scope.team_2.length > 0) {
+        $scope.getUsers();
+      }
+      else {
+        $scope.message =  $scope.team_1.length != $scope.team_2.length ? 'The number of 2 items must be equal' : 'Can not create if member in each team is empty';
+
+        ngDialog.open({
+          template: 'views/error-popup.html',
+          scope: $scope
+        });
+      }
+    };
   });

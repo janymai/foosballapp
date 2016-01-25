@@ -26,7 +26,7 @@
       <div class="col-xs-5 col-sm-4 col-md-3">
         <div class="panel panel-default">
           <div class="panel-heading text-center">Team 1</div>
-          <ul ui-sortable="sortableOptions" class="panel-body panel-body__team list-unstyled connected-drop-target-sortable sortable-team-1" ng-model="team_1">
+          <ul ui-sortable="sortableOptions_team_1" class="panel-body panel-body__team list-unstyled connected-drop-target-sortable sortable-team-1" ng-model="team_1">
             <li ng-repeat="item in team_1.slice(0, 2) track by $index">
               <span class="label label__default center-block">{{item.user_name}}</span>
             </li>
@@ -35,15 +35,15 @@
       </div>
       <div class="col-xs-2 col-sm-4 col-md-2">
         <div class="row type-score">
-          <div class="col-xs-12 col-sm-5"><input type="number" placeholder="0"/></div>
+          <div class="col-xs-12 col-sm-5"><input type="number" placeholder="0" ng-model="team_1.point"/></div>
           <div class="col-xs-12 col-sm-2 text-center"><span class="bar"></span></div>
-          <div class="col-xs-12 col-sm-5"><input type="number" placeholder="0"/></div>
+          <div class="col-xs-12 col-sm-5"><input type="number" placeholder="0" ng-model="team_2.point"/></div>
         </div>
       </div>
       <div class="col-xs-5 col-sm-4 col-md-3">
         <div class="panel panel-default">
           <div class="panel-heading text-center">Team 2</div>
-          <ul ui-sortable="sortableOptions1" class="panel-body panel-body__team list-unstyled connected-drop-target-sortable sortable-team-2" ng-model="team_2">
+          <ul ui-sortable="sortableOptions_team_2" class="panel-body panel-body__team list-unstyled connected-drop-target-sortable sortable-team-2" ng-model="team_2">
             <li ng-repeat="item in team_2.slice(0, 2) track by $index">
               <span class="label label__default center-block">{{item.user_name}}</span>
             </li>
