@@ -8,7 +8,8 @@ angular.module('foosballApp', [
   'ui.router',
   'ui.sortable',
   'restangular',
-  'angularMoment'
+  'angularMoment',
+  'ngDialog'
 ])
   .config(function (
     $stateProvider,
