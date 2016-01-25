@@ -23,13 +23,4 @@ angular.module('foosballApp')
       $scope.isShowNewGame = !$scope.isShowNewGame;
       $scope.optionCreateBtn();
     };
-
-    /**
-     * when finished create a new game
-     * newgame template will close
-    */
-    $scope.createGame = function () {
-      $scope.isShowNewGame = false;
-      $scope.optionCreateBtn();
-    };
   });
