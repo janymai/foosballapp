@@ -6,6 +6,7 @@ angular.module('foosballApp', [
   'ngResource',
   'ngSanitize',
   'ui.router',
+  'ui.sortable',
   'restangular',
   'angularMoment'
 ])
