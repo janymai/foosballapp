@@ -110,6 +110,30 @@ var startMock = function ($httpBackend) {
     return [200, {results: rankData}, {}];
   });
 
+  /**
+  * Get users
+  * API: /api/users
+  */
+  var apiUsers = /api\/users/
+  $httpBackend.when('GET', apiUsers).respond(function (method, url) {
+    var limitUsers = 20,
+        users = [];
+    /**
+    * Render users data
+    *
+    * times render: limitUsers
+    * @return
+    */
+    _.each(_.range(limitUsers), function (index) {
+      users.push({
+        "id": index + 1,
+        "user_name": Faker.Name.firstName() + ' ' + _.shuffle(LASTNAMES)[0],
+      });
+    });
+
+    return [200, {results: users}, {}];
+  });
+
   // If GET it is not api it will this passThrough
   $httpBackend.when('GET', /views/).passThrough();
 
