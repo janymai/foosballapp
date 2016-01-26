@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('foosballApp')
-  .controller('HeaderCtrl', function ($scope) {
+  .controller('HeaderCtrl', function ($scope, ngDialog) {
     /**
      * click on button new game
      * show content newgame template
@@ -23,4 +23,16 @@ angular.module('foosballApp')
       $scope.isShowNewGame = !$scope.isShowNewGame;
       $scope.optionCreateBtn();
     };
+
+    /**
+     * Login
+     * Show dialog to implement Login
+    */
+    $scope.login = function () {
+      ngDialog.open({
+        template: 'views/access.html',
+        className: 'ngdialog-theme-default access-dialog',
+        controller: 'AccessCtrl'
+      });
+    }
   });
