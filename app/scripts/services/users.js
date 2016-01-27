@@ -14,6 +14,16 @@ angular.module('foosballApp')
       */
       getUsers: function () {
         return service.customGET();
+      },
+
+      /**
+      * Create users
+      * POST: /api/users
+      *
+      * @return {Promise}
+      */
+      postUser: function (params) {
+        return service.post(params);
       }
     };
   });
