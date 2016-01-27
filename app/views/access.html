@@ -4,7 +4,7 @@
     <form name="formNewMember" novalidate role="form">
       <div class="form-group">
         <label for="inputFirstName">First name</label>
-        <input type="text" name="firstName" ng-model="member.firstName" class="form-control" id="inputFirstName" placeholder="First Name" minlength="6" required/>
+        <input type="text" name="firstName" ng-model="member.firstName" class="form-control" id="inputFirstName" placeholder="First Name" required/>
         <div class="error-message" ng-show="(retrySubmit || formNewMember.firstName.$dirty) && formNewMember.firstName.$error.required">
           <p>First name is required</p>
         </div>
@@ -12,7 +12,7 @@
 
       <div class="form-group">
         <label for="inputLastName">Last name</label>
-        <input type="text" name="lastName" ng-model="member.lastName" class="form-control" id="inputLastName" placeholder="Last Name" minlength="6" required/>
+        <input type="text" name="lastName" ng-model="member.lastName" class="form-control" id="inputLastName" placeholder="Last Name" required/>
         <div class="error-message" ng-show="(retrySubmit || formNewMember.lastName.$dirty) && formNewMember.lastName.$error.required">
           <p>Last name is required</p>
         </div>
@@ -29,9 +29,9 @@
                required/>
         <div class="error-message">
           <p ng-show="(retrySubmit || formNewMember.email.$dirty) && formNewMember.email.$error.required">Email is required</p>
-          <p ng-show="(retrySubmit || formNewMember.email.$dirty)">
-            <span ng-show="formNewMember.email.$error.email">Invalid email</span>
-            <span ng-show="formNewMember.email.$valid">Email need the @roomorama.com</span>
+          <p>
+            <span ng-show="(retrySubmit || formNewMember.email.$dirty) && formNewMember.email.$error.email">Invalid email</span>
+            <span ng-show="(retrySubmit || formNewMember.email.$dirty) && !formNewMember.email.$valid">Email need the @roomorama.com</span>
           </p>
         </div>
       </div>
@@ -39,8 +39,11 @@
       <div class="form-group">
         <label for="inputPassword">Password</label>
         <input type="password" name="password" ng-model="member.password" class="form-control" id="inputPassword" placeholder="Password" minlength="6" required/>
-        <div class="error-message" ng-show="(retrySubmit || formNewMember.password.$dirty) && formNewMember.password.$error.required">
-          <p>Password is required</p>
+        <div class="error-message">
+          <p>
+             <span ng-show="(retrySubmit || formNewMember.password.$dirty) && formNewMember.password.$error.required">Password is required</span>
+             <span ng-show="(retrySubmit || formNewMember.password.$dirty) && !formNewMember.password.$valid">The min length 6 characters</span>
+          </p>
         </div>
       </div>
 
@@ -60,10 +63,10 @@
                placeholder="Email"
                required/>
         <div class="error-message">
-          <p ng-show="(retrySignIn || formSignin.email.$dirty) && formSignin.email.$error.required">Email is required</p>
-          <p ng-show="(retrySignIn || formSignin.email.$dirty)">
-            <span ng-show="formSignin.email.$error.email">Invalid email</span>
-            <span ng-show="formSignin.email.$valid">Email need the @roomorama.com</span>
+          <p>
+            <span ng-show="(retrySignIn || formSignin.email.$dirty) && formSignin.email.$error.required">Email is required</span>
+            <span ng-show="(retrySignIn || formSignin.email.$dirty) && formSignin.email.$error.email">Invalid email</span>
+            <span ng-show="(retrySignIn || formSignin.email.$dirty) && !formSignin.email.$valid">Email need the @roomorama.com</span>
           </p>
         </div>
       </div>
