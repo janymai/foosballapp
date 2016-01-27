@@ -1,44 +1,84 @@
-<section class="-bg-gray-dark">
-  <div class="container container-sm-equal-height ">
-    <div class="row row-sm-equal-height form__wrapper">
-      <div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-2 -bg-white form__content">
-        <h2 class="page-header hidden-xs">New member?</h2>
-        <button class="btn btn-block btn__dark -radius visible-xs-block">New member?</button>
-        <form class="hidden-xs">
-          <div class="form-group">
-            <label for="inputFirstName">First name</label>
-            <input type="name" class="form-control" id="inputFirstName" placeholder="First Name">
-          </div>
-          <div class="form-group">
-            <label for="inputLastName">Last name</label>
-            <input type="name" class="form-control" id="inputLastName" placeholder="Last Name">
-          </div>
-          <div class="form-group">
-            <label for="inputEmail">Email address</label>
-            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-          </div>
-          <div class="form-group">
-            <label for="inputPassword">Password</label>
-            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-          </div>
-          <button type="submit" class="btn btn-default btn-block btn__dark">Submit</button>
-        </form>
+<div class="form__wrapper form_has_col">
+  <div class="col-xs-12 col-sm-6 -bg-white form__content">
+    <h2 class="page-header">New member?</h2>
+    <form name="formNewMember" novalidate role="form">
+      <div class="form-group">
+        <label for="inputFirstName">First name</label>
+        <input type="text" name="firstName" ng-model="member.firstName" class="form-control" id="inputFirstName" placeholder="First Name" required/>
+        <div class="error-message" ng-show="(retrySubmit || formNewMember.firstName.$dirty) && formNewMember.firstName.$error.required">
+          <p>First name is required</p>
+        </div>
       </div>
-      <div class="col-xs-12 col-sm-6 col-md-4 -bg-gray form__content">
-        <h2 class="page-header hidden-xs">Already registered?</h2>
-        <button class="btn btn-block btn__dark -radius visible-xs-block">Already registered?</button>
-        <form class="hidden-xs">
-          <div class="form-group">
-            <label for="inputEmail">Email address</label>
-            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-          </div>
-          <div class="form-group">
-            <label for="inputPassword">Password</label>
-            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-          </div>
-          <button type="submit" class="btn btn-default btn-block btn__dark">Submit</button>
-        </form>
+
+      <div class="form-group">
+        <label for="inputLastName">Last name</label>
+        <input type="text" name="lastName" ng-model="member.lastName" class="form-control" id="inputLastName" placeholder="Last Name" required/>
+        <div class="error-message" ng-show="(retrySubmit || formNewMember.lastName.$dirty) && formNewMember.lastName.$error.required">
+          <p>Last name is required</p>
+        </div>
       </div>
-    </div> <!-- ./row -->
-  </div> <!-- ./container -->
-</section>
+
+      <div class="form-group">
+        <label for="inputEmail">Email address</label>
+        <input type="email" name="email"
+               ng-model="member.email"
+               ng-pattern="/@roomorama.com/"
+               class="form-control"
+               id="inputEmail"
+               placeholder="Email"
+               required/>
+        <div class="error-message">
+          <p ng-show="(retrySubmit || formNewMember.email.$dirty) && formNewMember.email.$error.required">Email is required</p>
+          <p>
+            <span ng-show="(retrySubmit || formNewMember.email.$dirty) && formNewMember.email.$error.email">Invalid email</span>
+            <span ng-show="(retrySubmit || formNewMember.email.$dirty) && !formNewMember.email.$valid">Email need the @roomorama.com</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputPassword">Password</label>
+        <input type="password" name="password" ng-model="member.password" class="form-control" id="inputPassword" placeholder="Password" minlength="6" required/>
+        <div class="error-message">
+          <p>
+             <span ng-show="(retrySubmit || formNewMember.password.$dirty) && formNewMember.password.$error.required">Password is required</span>
+             <span ng-show="(retrySubmit || formNewMember.password.$dirty) && !formNewMember.password.$valid">The min length 6 characters</span>
+          </p>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-default btn-block btn__dark" ng-click="createUser(formNewMember, member)">Submit</button>
+    </form>
+  </div>
+  <div class="col-xs-12 col-sm-6 -bg-light-gray form__content">
+    <h2 class="page-header">Already registered?</h2>
+    <form name="formSignin" novalidate role="form">
+      <div class="form-group">
+        <label for="inputEmail">Email address</label>
+        <input type="email" name="email"
+               ng-model="user.email"
+               ng-pattern="/@roomorama.com/"
+               class="form-control"
+               id="inputEmail"
+               placeholder="Email"
+               required/>
+        <div class="error-message">
+          <p>
+            <span ng-show="(retrySignIn || formSignin.email.$dirty) && formSignin.email.$error.required">Email is required</span>
+            <span ng-show="(retrySignIn || formSignin.email.$dirty) && formSignin.email.$error.email">Invalid email</span>
+            <span ng-show="(retrySignIn || formSignin.email.$dirty) && !formSignin.email.$valid">Email need the @roomorama.com</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputPassword">Password</label>
+        <input type="password" name="password" ng-model="user.password" class="form-control" id="inputPassword" placeholder="Password" minlength="6" required/>
+        <div class="error-message" ng-show="(retrySignIn || formSignin.password.$dirty) && formSignin.password.$error.required">
+          <p>Password is required</p>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-default btn-block btn__dark" ng-click="signin(formSignin, user)">Submit</button>
+    </form>
+  </div>
+</div> <!-- ./row -->

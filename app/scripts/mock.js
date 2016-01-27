@@ -110,6 +110,63 @@ var startMock = function ($httpBackend) {
     return [200, {results: rankData}, {}];
   });
 
+  /**
+  * Get users
+  * API: /api/users
+  */
+  var apiUsers = /api\/users/
+  $httpBackend.when('GET', apiUsers).respond(function (method, url) {
+    var limitUsers = 20,
+        users = [];
+    /**
+    * Render users data
+    *
+    * times render: limitUsers
+    * @return
+    */
+    _.each(_.range(limitUsers), function (index) {
+      users.push({
+        "id": index + 1,
+        "user_name": Faker.Name.firstName() + ' ' + _.shuffle(LASTNAMES)[0],
+      });
+    });
+
+    return [200, {results: users}, {}];
+  });
+
+  /**
+  * Create user
+  * API: /api/users
+  */
+  var createUsers = /api\/users/
+  $httpBackend.when('POST', createUsers).respond(function (method, url) {
+    var user = BASIC_USER;
+    /**
+    * Render users data
+    *
+    * @return
+    */
+
+    return [200, {user: user}, {}];
+
+  });
+
+  /**
+  * Login
+  * API: /login
+  */
+  var loginUsers = /api\/login/
+  $httpBackend.when('POST', loginUsers).respond(function (method, url) {
+    var user = BASIC_USER;
+    /**
+    * Render users data
+    *
+    * @return
+    */
+
+    return [200, {user: user}, {}];
+  });
+
   // If GET it is not api it will this passThrough
   $httpBackend.when('GET', /views/).passThrough();
 
@@ -121,7 +178,7 @@ angular.module('foosballApp')
       $provide.decorator('$httpBackend', angular.mock.e2e.$httpBackendDecorator);
     }
   })
-  .run(function($httpBackend) {
+  .run(function($httpBackend, $rootScope) {
     if (nobackend) {
       startMock($httpBackend);
     }

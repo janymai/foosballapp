@@ -11,10 +11,12 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <!-- build:css(.tmp) styles/main.css -->
-        <link rel="stylesheet" href="styles/main.css">
-        <!-- endbuild -->
-</head>
+      <!-- build:css(.tmp) styles/main.css -->
+      <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css">
+      <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css">
+      <link rel="stylesheet" href="styles/main.css">
+      <!-- endbuild -->
+  </head>
   <body ng-app="foosballApp">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -68,6 +70,10 @@
     <script src="bower_components/restangular/dist/restangular.js"></script>
     <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/angular-moment/angular-moment.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="bower_components/angular-ui-sortable/sortable.js"></script>
+    <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
+
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -86,6 +92,8 @@
     <script src="scripts/mock.js"></script>
     <script src="scripts/services/game.js"></script>
     <script src="scripts/services/rank.js"></script>
+    <script src="scripts/services/users.js"></script>
+    <script src="scripts/services/authenticate.js"></script>
     <!-- endbuild -->
     <!-- endmock -->
 </body>

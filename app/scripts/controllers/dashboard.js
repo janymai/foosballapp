@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('foosballApp')
-  .controller('DashboardCtrl', function ($scope, GameService, RankService) {
-
+  .controller('DashboardCtrl', function ($scope, $rootScope, GameService, RankService) {
     // Get Last Games
     $scope.getLastGames = function () {
       GameService
@@ -34,4 +33,8 @@ angular.module('foosballApp')
       $scope.type = param;
       $scope.getRank(param);
     }
+
+    // if $rootScope.currentUser {
+    //   console.log('current user');
+    // }
   });

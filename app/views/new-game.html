@@ -1,4 +1,4 @@
-<section class="-bg-gray-dark -c-gray" ng-controller="GameCtrl">
+<section class="-bg-gray-dark -c-gray" ng-controller="NewGameCtrl">
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-md-7">
@@ -10,11 +10,11 @@
     <div class="row">
       <div class="col-xs-12">
         <h4>Please drag and drop players in their respective teams then fill up the game’s score</h4>
-        <div class="tabs">
+        <div class="tags">
           <span ui-sortable="draggableOptions" class="screen draggable-element-container"
-                ng-repeat="draggableArray in draggables track by $index"
+                ng-repeat="draggableArray in users track by $index"
                 ng-model="draggableArray">
-            <span ng-repeat="draggable in draggableArray" class="label label__default">{{draggable.name}}</span>
+            <span ng-repeat="draggable in draggableArray" class="label label__default">{{draggable.user_name}}</span>
           </span>
         </div>
       </div>
@@ -23,29 +23,30 @@
     <hr/>
 
     <div class="row">
-      <div class="col-xs-5 col-sm-4 col-md-3">
-        <div class="panel panel-default">
+      <div class="col-sm-4 col-md-3">
+        <div class="panel panel-default tb-team">
           <div class="panel-heading text-center">Team 1</div>
-          <ul ui-sortable="sortableOptions" class="panel-body panel-body__team list-unstyled connected-drop-target-sortable" ng-model="selectedComponents">
-            <li ng-repeat="component in selectedComponents track by $index">
-              <span class="label label__default center-block">{{component.name}}</span>
+          <ul ui-sortable="sortableOptions_team_1" class="panel-body panel-body__team list-unstyled connected-drop-target-sortable sortable-team-1" ng-model="team_1">
+            <li ng-repeat="item in team_1.slice(0, 2) track by $index">
+              <span class="label label__default center-block">{{item.user_name}}</span>
             </li>
           </ul>
         </div>
       </div>
-      <div class="col-xs-2 col-sm-4 col-md-2">
+      <div class="col-sm-4 col-md-2">
+
         <div class="row type-score">
-          <div class="col-xs-12 col-sm-5"><input type="number" placeholder="0"/></div>
-          <div class="col-xs-12 col-sm-2 text-center"><span class="bar"></span></div>
-          <div class="col-xs-12 col-sm-5"><input type="number" placeholder="0"/></div>
+          <div class="input__score col-sm-5"><input type="number" placeholder="0" ng-model="team_1.point"/></div>
+          <div class="input__score col-sm-2 text-center"><span class="bar"></span></div>
+          <div class="input__score col-sm-5"><input type="number" placeholder="0" ng-model="team_2.point"/></div>
         </div>
       </div>
-      <div class="col-xs-5 col-sm-4 col-md-3">
-        <div class="panel panel-default">
+      <div class="col-sm-4 col-md-3">
+        <div class="panel panel-default tb-team">
           <div class="panel-heading text-center">Team 2</div>
-          <ul ui-sortable="sortableOptions1" class="panel-body panel-body__team list-unstyled connected-drop-target-sortable" ng-model="selectedComponents1">
-            <li ng-repeat="component in selectedComponents1 track by $index">
-              <span class="label label__default center-block">{{component.name}}</span>
+          <ul ui-sortable="sortableOptions_team_2" class="panel-body panel-body__team list-unstyled connected-drop-target-sortable sortable-team-2" ng-model="team_2">
+            <li ng-repeat="item in team_2.slice(0, 2) track by $index">
+              <span class="label label__default center-block">{{item.user_name}}</span>
             </li>
           </ul>
         </div>

@@ -17,6 +17,7 @@
   }
 }
 
+
 @media (min-width: $screen-sm-min) {
   .form__content {
     padding-right: 40px;
@@ -32,6 +33,10 @@
       &:last-child {
         border-radius: 0 15px 15px 0;
       }
+    }
+    &.form_has_col {
+      display: table;
+      width: 100%;
     }
   }
 }

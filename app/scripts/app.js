@@ -1,13 +1,18 @@
 'use strict';
 
+// Detect the case for authenticated
+var authenticated = document.URL.match(/authenticated/);
+var BASIC_USER = {id: 1234, name: 'Test User'};
 
 angular.module('foosballApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
   'ui.router',
+  'ui.sortable',
   'restangular',
-  'angularMoment'
+  'angularMoment',
+  'ngDialog'
 ])
   .config(function (
     $stateProvider,
@@ -37,5 +42,25 @@ angular.module('foosballApp', [
 
     // make href accept javascript:void(0) as a url
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|javascript):/);
+
+  })
+  .run(function ($rootScope, ngDialog) {
+    /**
+     * Current user
+     * Using URL to convention
+     * Current User: URL match /authenticated/
+     * Is not User : URL not match /authenticated/
+    */
+    $rootScope.currentUser = authenticated ? BASIC_USER : null;
+
+    if ($rootScope.currentUser) {
+      console.log('abc');
+    } else {
+      ngDialog.open({
+        template: 'views/access.html',
+        className: 'ngdialog-theme-default access-dialog',
+        controller: 'AccessCtrl'
+      });
+    }
 
   });
