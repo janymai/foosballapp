@@ -134,6 +134,39 @@ var startMock = function ($httpBackend) {
     return [200, {results: users}, {}];
   });
 
+  /**
+  * Create user
+  * API: /api/users
+  */
+  var createUsers = /api\/users/
+  $httpBackend.when('POST', createUsers).respond(function (method, url) {
+    var user = BASIC_USER;
+    /**
+    * Render users data
+    *
+    * @return
+    */
+
+    return [200, {user: user}, {}];
+
+  });
+
+  /**
+  * Login
+  * API: /login
+  */
+  var loginUsers = /api\/login/
+  $httpBackend.when('POST', loginUsers).respond(function (method, url) {
+    var user = BASIC_USER;
+    /**
+    * Render users data
+    *
+    * @return
+    */
+
+    return [200, {user: user}, {}];
+  });
+
   // If GET it is not api it will this passThrough
   $httpBackend.when('GET', /views/).passThrough();
 
