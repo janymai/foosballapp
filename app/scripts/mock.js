@@ -145,7 +145,7 @@ angular.module('foosballApp')
       $provide.decorator('$httpBackend', angular.mock.e2e.$httpBackendDecorator);
     }
   })
-  .run(function($httpBackend) {
+  .run(function($httpBackend, $rootScope) {
     if (nobackend) {
       startMock($httpBackend);
     }
