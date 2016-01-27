@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('foosballApp')
-  .controller('AccessCtrl', function ($scope) {
+  .controller('AccessCtrl', function ($rootScope, $scope, UserService, ngDialog, AuthenticateService) {
     $scope.retrySubmit = false;
     $scope.retrySignIn = false;
     /**
@@ -17,11 +17,27 @@ angular.module('foosballApp')
       $scope.retrySubmit = true;
       $scope.retrySignIn = false;
 
+      /**
+       * Call API to Create user
+       * If form formNewMember is valid
+       * Call API create user
+       * If form formNewMember is invalid
+       * Show popup to inform that can not create user
+      */
       if (formNewMember.$valid) {
-        console.log('valid');
+        UserService
+          .postUser(member)
+          .then(function (resp) {
+            ngDialog.closeAll();
+            $rootScope.currentUser = resp.user;
+          }, function (resp) {
+            $scope.message = "Can not create User."
+            ngDialog.open({
+              template: 'views/error-popup.html',
+              scope: $scope
+            });
+          });
       }
-      // that ra thi nen goi api
-      console.log(formNewMember, member);
     };
 
     /**
@@ -36,9 +52,19 @@ angular.module('foosballApp')
       $scope.retrySignIn = true;
 
       if (formSignin.$valid) {
-        console.log('valid');
+        AuthenticateService
+          .login(user)
+          .then(function (resp) {
+            ngDialog.closeAll();
+            $rootScope.currentUser = resp.user;
+          }, function (resp) {
+            $scope.message = "Wrong email or password"
+            ngDialog.open({
+              template: 'views/error-popup.html',
+              scope: $scope
+            });
+          });
       }
-      // that ra thi nen goi api
-      console.log(formSignin, user);
+
     };
   });
