@@ -1,8 +1,7 @@
 <div class="form__wrapper form_has_col">
   <div class="col-xs-12 col-sm-6 -bg-white form__content">
-    <h2 class="page-header hidden-xs">New member?</h2>
-    <button class="btn btn-block btn__dark -radius visible-xs-block">New member?</button>
-    <form class="hidden-xs" name="formNewMember" novalidate role="form">
+    <h2 class="page-header">New member?</h2>
+    <form name="formNewMember" novalidate role="form">
       <div class="form-group">
         <label for="inputFirstName">First name</label>
         <input type="text" name="firstName" ng-model="member.firstName" class="form-control" id="inputFirstName" placeholder="First Name" minlength="6" required/>
@@ -49,9 +48,8 @@
     </form>
   </div>
   <div class="col-xs-12 col-sm-6 -bg-light-gray form__content">
-    <h2 class="page-header hidden-xs">Already registered?</h2>
-    <button class="btn btn-block btn__dark -radius visible-xs-block">Already registered?</button>
-    <form class="hidden-xs" name="formSignin" novalidate role="form">
+    <h2 class="page-header">Already registered?</h2>
+    <form name="formSignin" novalidate role="form">
       <div class="form-group">
         <label for="inputEmail">Email address</label>
         <input type="email" name="email"

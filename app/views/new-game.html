@@ -10,7 +10,7 @@
     <div class="row">
       <div class="col-xs-12">
         <h4>Please drag and drop players in their respective teams then fill up the game’s score</h4>
-        <div class="tabs">
+        <div class="tags">
           <span ui-sortable="draggableOptions" class="screen draggable-element-container"
                 ng-repeat="draggableArray in users track by $index"
                 ng-model="draggableArray">
@@ -24,7 +24,7 @@
 
     <div class="row">
       <div class="col-xs-5 col-sm-4 col-md-3">
-        <div class="panel panel-default">
+        <div class="panel panel-default tb-team">
           <div class="panel-heading text-center">Team 1</div>
           <ul ui-sortable="sortableOptions_team_1" class="panel-body panel-body__team list-unstyled connected-drop-target-sortable sortable-team-1" ng-model="team_1">
             <li ng-repeat="item in team_1.slice(0, 2) track by $index">
@@ -41,7 +41,7 @@
         </div>
       </div>
       <div class="col-xs-5 col-sm-4 col-md-3">
-        <div class="panel panel-default">
+        <div class="panel panel-default tb-team">
           <div class="panel-heading text-center">Team 2</div>
           <ul ui-sortable="sortableOptions_team_2" class="panel-body panel-body__team list-unstyled connected-drop-target-sortable sortable-team-2" ng-model="team_2">
             <li ng-repeat="item in team_2.slice(0, 2) track by $index">
